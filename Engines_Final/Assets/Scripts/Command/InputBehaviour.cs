@@ -6,8 +6,11 @@ public class InputBehaviour : MonoBehaviour
 {
     private InputBehaviour instance;
 
-    private List<Inputs> movementQueue = new List<Inputs>();
-    private List<Inputs> rotationQueue = new List<Inputs>();
+    [SerializeField] private List<Inputs> movementQueue = new List<Inputs>();
+    [SerializeField] private List<Inputs> rotationQueue = new List<Inputs>();
+
+    private bool iteratingMovement = false;
+    private bool iteratingRotation = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,6 +21,7 @@ public class InputBehaviour : MonoBehaviour
         if(instance != null && instance != this)
         {
             // While probably not necessary, I have this here just in case the queues don't get reset for new pieces.
+
             movementQueue.Clear();
             rotationQueue.Clear();
 
@@ -82,67 +86,121 @@ public class InputBehaviour : MonoBehaviour
             UnityEngine.Debug.Log("added right rotation");
         }
 
-        if (movementQueue.Count > 0) // Makes sure the list isn't empty first.
+        if(iteratingMovement == false)
         {
-            //UnityEngine.Debug.Log("movement list not empty");
-            MovementIteration();
+            if (movementQueue.Count > 0) // Makes sure the list isn't empty first.
+            {
+                //UnityEngine.Debug.Log("movement list not empty");
+                iteratingMovement = true;
+                MovementIteration();
+            }
         }
 
-        if (rotationQueue.Count > 0) // Makes sure the list isn't empty first.
+        if(iteratingRotation == false)
         {
-            //UnityEngine.Debug.Log("rotation list not empty");
-            RotationIteration();
+            if (rotationQueue.Count > 0) // Makes sure the list isn't empty first.
+            {
+                //UnityEngine.Debug.Log("rotation list not empty");
+                iteratingRotation = true;
+                RotationIteration();
+
+            }
         }
     }
 
     private void MovementIteration()
     {
+        bool movementDone = false;
+
         for (int i = 0; i <= movementQueue.Count; i++) // Iterate over each input stored in the queue.
         {
-            if (i == movementQueue.Count) // If the end of the list has been reached, restart.
+            if(movementQueue.Count > 0)
             {
-                i = 0;
-            }
-            else
-            {
-                switch (movementQueue[i].ToString())
-                {
+                switch (movementQueue[i].ToString()) // The only thing stopping this code from working, is that I need to get the name of the item in the queue.
+                {                                    // This only returns Inputs because that is the type of the object. Everything works fine otherwise.
                     case "drop":
-                        movementQueue[i].Drop();
+                        movementDone = movementQueue[i].Drop();
+
+                        if (movementDone == true)
+                        {
+                            movementQueue.RemoveAt(i);
+                            movementDone = false;
+                        }
                         break;
                     case "down":
-                        movementQueue[i].Down();
+                        movementDone = movementQueue[i].Down();
+
+                        if (movementDone == true)
+                        {
+                            movementQueue.RemoveAt(i);
+                            movementDone = false;
+                        }
                         break;
                     case "left":
-                        movementQueue[i].Left();
+                        movementDone = movementQueue[i].Left();
+
+                        if (movementDone == true)
+                        {
+                            movementQueue.RemoveAt(i);
+                            movementDone = false;
+                        }
                         break;
                     case "right":
-                        movementQueue[i].Right();
+                        movementDone = movementQueue[i].Right();
+
+                        if (movementDone == true)
+                        {
+                            movementQueue.RemoveAt(i);
+                            movementDone = false;
+                        }
                         break;
                 }
+            }    
+            else
+            {
+                iteratingMovement = false;
+                movementQueue.Clear();
+                return;
             }
         }
     }
 
     private void RotationIteration()
     {
+        bool rotationDone = false;
+
         for (int i = 0; i <= rotationQueue.Count; i++) // Iterate over each rotation in the queue.
         {
-            if (i == rotationQueue.Count) // If the end of the list has been reached, restart.
+            if (rotationQueue.Count > 0)
             {
-                i = 0;
+                switch (rotationQueue[i].ToString()) // The only thing stopping this code from working, is that I need to get the name of the item in the queue.
+                {                                    // This only returns Inputs because that is the type of the object. Everything works fine otherwise.
+                    case "rotateLeft":
+                        rotationDone = rotationQueue[i].RotateLeft();
+                        
+                        if(rotationDone == true)
+                        {
+                            rotationQueue.RemoveAt(i);
+                            rotationDone = false;
+                        }
+
+                        break;
+                    case "rotateRight":
+                        rotationDone = rotationQueue[i].RotateRight();
+
+                        if (rotationDone == true)
+                        {
+                            rotationQueue.RemoveAt(i);
+                            rotationDone = false;
+                        }
+                        break;
+                }
             }
             else
             {
-                switch (rotationQueue[i].ToString())
-                {
-                    case "rotateLeft":
-                        rotationQueue[i].RotateLeft();
-                        break;
-                    case "rotateRight":
-                        rotationQueue[i].RotateRight();
-                        break;
-                }
+                iteratingRotation = false;
+                rotationQueue.Clear();
+                return;
             }
         }
     }
@@ -150,34 +208,41 @@ public class InputBehaviour : MonoBehaviour
 
 public class Inputs
 {
-    public void Drop()
+    public bool Drop()
     {
         UnityEngine.Debug.Log("dropped");
+        return true;
+        
     }
 
-    public void Down()
+    public bool Down()
     {
         UnityEngine.Debug.Log("moved down");
+        return true;
     }
 
-    public void Left()
+    public bool Left()
     {
         UnityEngine.Debug.Log("moved left");
+        return true;
     }
 
-    public void Right()
+    public bool Right()
     {
         UnityEngine.Debug.Log("moved right");
+        return true;
     }
 
-    public void RotateLeft()
+    public bool RotateLeft()
     {
         UnityEngine.Debug.Log("rotated left");
+        return true;
     }
 
-    public void RotateRight()
+    public bool RotateRight()
     {
         UnityEngine.Debug.Log("rotated right");
+        return true;
     }
 }
 

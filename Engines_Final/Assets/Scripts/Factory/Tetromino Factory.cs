@@ -3,7 +3,7 @@ using UnityEngine;
 public class TetrominoFactory : MonoBehaviour
 {
 
-    // Cubes representing the shapes
+    // Cubes representing the shapes. All blocks are input in the factory object as they are serialized.
     [SerializeField] GameObject[] L_Block;
     [SerializeField] GameObject[] T_Block;
     [SerializeField] GameObject[] J_Block;
