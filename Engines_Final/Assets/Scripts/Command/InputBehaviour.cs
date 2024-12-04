@@ -38,86 +38,110 @@ public class InputBehaviour : MonoBehaviour
             Inputs drop = new Inputs();
             movementQueue.Add(drop);
             drop = null;
+
+            UnityEngine.Debug.Log("added drop movement");
         }
         if(Input.GetKeyDown(KeyCode.S)) // S will drop a piece by one tile.
         {
             Inputs down = new Inputs();
             movementQueue.Add(down);
             down = null;
+
+            UnityEngine.Debug.Log("added down movement");
         }
         if(Input.GetKeyDown(KeyCode.A)) // A will move a piece left by one tile.
         {
             Inputs left = new Inputs();
             movementQueue.Add(left);
             left = null;
+
+            UnityEngine.Debug.Log("added left movement");
         }
         if(Input.GetKeyDown(KeyCode.D)) // D will move a piece right by one tile.
         {
             Inputs right = new Inputs();
             movementQueue.Add(right);
             right = null;
+
+            UnityEngine.Debug.Log("added right movement");
         }
         if(Input.GetKeyDown(KeyCode.Q)) // Q will rotate a tile left.
         {
             Inputs rotateLeft = new Inputs();
             rotationQueue.Add(rotateLeft);
             rotateLeft = null;
+
+            UnityEngine.Debug.Log("added left rotation");
         }
         if(Input.GetKeyDown(KeyCode.E)) // E will rotate a tile right.
         {
             Inputs rotateRight = new Inputs();
             rotationQueue.Add(rotateRight);
             rotateRight = null;
+
+            UnityEngine.Debug.Log("added right rotation");
         }
 
         if (movementQueue.Count > 0) // Makes sure the list isn't empty first.
         {
-            for (int i = 0; i <= movementQueue.Count; i++) // Iterate over each input stored in the queue.
+            //UnityEngine.Debug.Log("movement list not empty");
+            MovementIteration();
+        }
+
+        if (rotationQueue.Count > 0) // Makes sure the list isn't empty first.
+        {
+            //UnityEngine.Debug.Log("rotation list not empty");
+            RotationIteration();
+        }
+    }
+
+    private void MovementIteration()
+    {
+        for (int i = 0; i <= movementQueue.Count; i++) // Iterate over each input stored in the queue.
+        {
+            if (i == movementQueue.Count) // If the end of the list has been reached, restart.
             {
-                if (i == movementQueue.Count) // If the end of the list has been reached, restart.
+                i = 0;
+            }
+            else
+            {
+                switch (movementQueue[i].ToString())
                 {
-                    i = 0;
-                }
-                else
-                {
-                    switch (movementQueue[i].ToString())
-                    {
-                        case "drop":
-                            movementQueue[i].Drop();
-                            break;
-                        case "down":
-                            movementQueue[i].Down();
-                            break;
-                        case "left":
-                            movementQueue[i].Left();
-                            break;
-                        case "right":
-                            movementQueue[i].Right();
-                            break;
-                    }
+                    case "drop":
+                        movementQueue[i].Drop();
+                        break;
+                    case "down":
+                        movementQueue[i].Down();
+                        break;
+                    case "left":
+                        movementQueue[i].Left();
+                        break;
+                    case "right":
+                        movementQueue[i].Right();
+                        break;
                 }
             }
         }
+    }
 
-        if(rotationQueue.Count > 0) // Makes sure the list isn't empty first.
+    private void RotationIteration()
+    {
+        for (int i = 0; i <= rotationQueue.Count; i++) // Iterate over each rotation in the queue.
         {
-            for (int i = 0; i <= rotationQueue.Count; i++) // Iterate over each rotation in the queue.
+            if (i == rotationQueue.Count) // If the end of the list has been reached, restart.
             {
-                if (i == rotationQueue.Count) // If the end of the list has been reached, restart.
+                i = 0;
+            }
+            else
+            {
+                switch (rotationQueue[i].ToString())
                 {
-                    i = 0;
-                }
-                else
-                {
-                    switch (rotationQueue[i].ToString())
-                    {
-                        case "rotateLeft":
-                            rotationQueue[i].RotateLeft();
-                            break;
-                        case "rotateRight":
-                            rotationQueue[i].RotateRight();
-                            break;
-                    }
+                    case "rotateLeft":
+                        rotationQueue[i].RotateLeft();
+                        break;
+                    case "rotateRight":
+                        rotationQueue[i].RotateRight();
+                        break;
                 }
             }
         }
