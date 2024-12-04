@@ -255,41 +255,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3855b3a8caeb3804ebff9a39a2284606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  L_Block:
-  - {fileID: 3725219215677347492, guid: 94f0cfe856bbdc0439f2b49880711819, type: 3}
-  - {fileID: 3725219215677347492, guid: 94f0cfe856bbdc0439f2b49880711819, type: 3}
-  - {fileID: 3725219215677347492, guid: 94f0cfe856bbdc0439f2b49880711819, type: 3}
-  - {fileID: 3725219215677347492, guid: 94f0cfe856bbdc0439f2b49880711819, type: 3}
-  T_Block:
-  - {fileID: 4073890540737459731, guid: 629200135d1d2be49bad8aa7d01b319d, type: 3}
-  - {fileID: 4073890540737459731, guid: 629200135d1d2be49bad8aa7d01b319d, type: 3}
-  - {fileID: 4073890540737459731, guid: 629200135d1d2be49bad8aa7d01b319d, type: 3}
-  - {fileID: 4073890540737459731, guid: 629200135d1d2be49bad8aa7d01b319d, type: 3}
-  J_Block:
-  - {fileID: 242139440282612270, guid: 6148c0ea9892f164b885c465b5609c61, type: 3}
-  - {fileID: 242139440282612270, guid: 6148c0ea9892f164b885c465b5609c61, type: 3}
-  - {fileID: 242139440282612270, guid: 6148c0ea9892f164b885c465b5609c61, type: 3}
-  - {fileID: 242139440282612270, guid: 6148c0ea9892f164b885c465b5609c61, type: 3}
-  S_Block:
-  - {fileID: 7080726336493363388, guid: d5b9e2aeffd73d84fb110366644aa4b4, type: 3}
-  - {fileID: 7080726336493363388, guid: d5b9e2aeffd73d84fb110366644aa4b4, type: 3}
-  - {fileID: 7080726336493363388, guid: d5b9e2aeffd73d84fb110366644aa4b4, type: 3}
-  - {fileID: 7080726336493363388, guid: d5b9e2aeffd73d84fb110366644aa4b4, type: 3}
-  Z_Block:
-  - {fileID: 6704184727781663497, guid: 96f6796875c94844ab94e9d2b491ae70, type: 3}
-  - {fileID: 6704184727781663497, guid: 96f6796875c94844ab94e9d2b491ae70, type: 3}
-  - {fileID: 6704184727781663497, guid: 96f6796875c94844ab94e9d2b491ae70, type: 3}
-  - {fileID: 6704184727781663497, guid: 96f6796875c94844ab94e9d2b491ae70, type: 3}
-  O_Block:
-  - {fileID: 5816083734251214932, guid: ced14025776c5ac40aa11e7d3ed89229, type: 3}
-  - {fileID: 5816083734251214932, guid: ced14025776c5ac40aa11e7d3ed89229, type: 3}
-  - {fileID: 5816083734251214932, guid: ced14025776c5ac40aa11e7d3ed89229, type: 3}
-  - {fileID: 5816083734251214932, guid: ced14025776c5ac40aa11e7d3ed89229, type: 3}
-  I_Block:
-  - {fileID: 8781340602467747941, guid: c4d2eb97394fd5d458360243f80deb5a, type: 3}
-  - {fileID: 8781340602467747941, guid: c4d2eb97394fd5d458360243f80deb5a, type: 3}
-  - {fileID: 8781340602467747941, guid: c4d2eb97394fd5d458360243f80deb5a, type: 3}
-  - {fileID: 8781340602467747941, guid: c4d2eb97394fd5d458360243f80deb5a, type: 3}
+  L_Cube: {fileID: 3725219215677347492, guid: 94f0cfe856bbdc0439f2b49880711819, type: 3}
+  T_Cube: {fileID: 4073890540737459731, guid: 629200135d1d2be49bad8aa7d01b319d, type: 3}
+  J_Cube: {fileID: 242139440282612270, guid: 6148c0ea9892f164b885c465b5609c61, type: 3}
+  S_Cube: {fileID: 7080726336493363388, guid: d5b9e2aeffd73d84fb110366644aa4b4, type: 3}
+  Z_Cube: {fileID: 6704184727781663497, guid: 96f6796875c94844ab94e9d2b491ae70, type: 3}
+  O_Cube: {fileID: 5816083734251214932, guid: ced14025776c5ac40aa11e7d3ed89229, type: 3}
+  I_Cube: {fileID: 8781340602467747941, guid: c4d2eb97394fd5d458360243f80deb5a, type: 3}
+  L_Blocks: []
+  T_Blocks: []
+  J_Blocks: []
+  S_Blocks: []
+  Z_Blocks: []
+  O_Blocks: []
+  I_Blocks: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

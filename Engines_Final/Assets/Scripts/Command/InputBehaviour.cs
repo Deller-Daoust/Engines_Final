@@ -15,23 +15,8 @@ public class InputBehaviour : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // The reason I have this in InputBehaviour, is because it will be applied to each active block as they fall.
-        // Once a new object starts falling, it will remove the instance from the previous tile.
-
-        if(instance != null && instance != this)
-        {
-            // While probably not necessary, I have this here just in case the queues don't get reset for new pieces.
-
-            movementQueue.Clear();
-            rotationQueue.Clear();
-
-            // Destroys the instance.
-            Destroy(instance);
-        }
-        else
-        {
-            instance = this;
-        }
+        movementQueue.Clear();
+        rotationQueue.Clear();
     }
 
     // Update is called once per frame
