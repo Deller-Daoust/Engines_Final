@@ -4,13 +4,30 @@ using UnityEngine;
 
 public class InputBehaviour : MonoBehaviour
 {
-    private List<Inputs> movementQueue;
-    private List<Inputs> rotationQueue;
+    private InputBehaviour instance;
+
+    private List<Inputs> movementQueue = new List<Inputs>();
+    private List<Inputs> rotationQueue = new List<Inputs>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        // The reason I have this in InputBehaviour, is because it will be applied to each active block as they fall.
+        // Once a new object starts falling, it will remove the instance from the previous tile.
+
+        if(instance != null && instance != this)
+        {
+            // While probably not necessary, I have this here just in case the queues don't get reset for new pieces.
+            movementQueue.Clear();
+            rotationQueue.Clear();
+
+            // Destroys the instance.
+            Destroy(instance);
+        }
+        else
+        {
+            instance = this;
+        }
     }
 
     // Update is called once per frame
@@ -53,52 +70,57 @@ public class InputBehaviour : MonoBehaviour
             rotateRight = null;
         }
 
-        for (int i = 0; i <= movementQueue.Count; i++) // Iterate over each input stored in the queue.
+        if (movementQueue.Count > 0) // Makes sure the list isn't empty first.
         {
-            if(i == movementQueue.Count) // If the end of the list has been reached, restart.
+            for (int i = 0; i <= movementQueue.Count; i++) // Iterate over each input stored in the queue.
             {
-                i = 0;
-            }
-            else
-            {
-                switch(movementQueue[i].ToString())
+                if (i == movementQueue.Count) // If the end of the list has been reached, restart.
                 {
-                    case "drop":
-                        movementQueue[i].Drop(); 
-                        break;
-                    case "down":
-                        movementQueue[i].Down();
-                        break;
-                    case "left":
-                        movementQueue[i].Left();
-                        break;
-                    case "right":
-                        movementQueue[i].Right();
-                        break;
+                    i = 0;
+                }
+                else
+                {
+                    switch (movementQueue[i].ToString())
+                    {
+                        case "drop":
+                            movementQueue[i].Drop();
+                            break;
+                        case "down":
+                            movementQueue[i].Down();
+                            break;
+                        case "left":
+                            movementQueue[i].Left();
+                            break;
+                        case "right":
+                            movementQueue[i].Right();
+                            break;
+                    }
                 }
             }
         }
 
-        for (int i = 0; i <= rotationQueue.Count; i++) // Iterate over each rotation in the queue.
+        if(rotationQueue.Count > 0) // Makes sure the list isn't empty first.
         {
-            if (i == rotationQueue.Count) // If the end of the list has been reached, restart.
+            for (int i = 0; i <= rotationQueue.Count; i++) // Iterate over each rotation in the queue.
             {
-                i = 0;
-            }
-            else
-            {
-                switch (rotationQueue[i].ToString())
+                if (i == rotationQueue.Count) // If the end of the list has been reached, restart.
                 {
-                    case "rotateLeft":
-                        rotationQueue[i].RotateLeft();
-                        break;
-                    case "rotateRight":
-                        rotationQueue[i].RotateRight();
-                        break;
+                    i = 0;
+                }
+                else
+                {
+                    switch (rotationQueue[i].ToString())
+                    {
+                        case "rotateLeft":
+                            rotationQueue[i].RotateLeft();
+                            break;
+                        case "rotateRight":
+                            rotationQueue[i].RotateRight();
+                            break;
+                    }
                 }
             }
         }
-
     }
 }
 
